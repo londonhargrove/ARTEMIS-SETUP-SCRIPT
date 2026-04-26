@@ -12,11 +12,8 @@ echo "======================================================="
 echo ""
 echo "Welcome to the Artemis Setup Wizard."
 echo ""
-echo "This utility provides several modular setup tools designed to enhance"
-echo "your Linux environment with aliases, professional software, gaming tools,"
-echo "and system utilities."
-echo ""
-echo "Select a module below to continue:"
+echo "This tool provides modular setup utilities to enhance your Linux system."
+echo "Choose a module below to continue."
 echo ""
 
 # Build an array of scripts
@@ -33,9 +30,6 @@ descriptions["aliases.sh"]="Adds Windows/DOS-style terminal aliases"
 descriptions["poweruser.sh"]="Installs both professional and gaming applications"
 descriptions["professional.sh"]="Installs only professional productivity tools"
 descriptions["gaming.sh"]="Installs only gaming-related tools"
-descriptions["install-all.sh"]="Runs all installers automatically"
-descriptions["neofetch.sh"]="Installs Neofetch if missing"
-descriptions["flatpak-discord.sh"]="Installs Flatpak + Discord"
 
 # Display numbered list with descriptions
 for i in "${!scripts[@]}"; do
