@@ -30,7 +30,7 @@ echo -e "${BLUE}          https://github.com/londonhargrove${NC}"
 echo "======================================================="
 echo ""
 
-echo -e "${YELLOW}Module: Gaming Environment Installer (Baseline)${NC}"
+echo -e "${YELLOW}Module: Professional Workstation Installer${NC}"
 echo -e "${GREEN}Press ESC to quit, or B to return to Artemis Setup.${NC}"
 echo ""
 
@@ -51,13 +51,22 @@ fi
 # ============================
 #   ACTION SUMMARY
 # ============================
-echo -e "${CYAN}This module will install the following gaming tools:${NC}"
-echo -e "${BLUE} • Steam"
-echo -e " • Lutris"
+echo -e "${CYAN}This module will install the following professional tools:${NC}"
+echo -e "${BLUE} • VSCodium"
+echo -e " • Git + GitHub CLI"
+echo -e " • Python 3 + pip"
+echo -e " • Node.js + npm"
+echo -e " • Java (OpenJDK)"
+echo -e " • C/C++ build tools (gcc, g++, make, cmake)"
+echo -e " • VirtualBox"
 echo -e " • OBS Studio"
-echo -e " • Flatpak & Flathub"
-echo -e " • Heroic Games Launcher (Flatpak)"
-echo -e " • Discord (Flatpak)${NC}"
+echo -e " • Blender"
+echo -e " • GIMP"
+echo -e " • LibreOffice"
+echo -e " • GParted"
+echo -e " • Neofetch"
+echo -e " • qBittorrent"
+echo -e " • SQLite${NC}"
 echo ""
 echo -e "${CYAN}A system update can be run or skipped.${NC}"
 echo ""
@@ -148,68 +157,60 @@ install_native() {
 }
 
 # ============================
-#   2. INSTALL FLATPAK + FLATHUB
+#   2. INSTALL DEVELOPMENT TOOLS
 # ============================
-echo -e "${YELLOW}Step 2: Checking Flatpak...${NC}"
+echo -e "${YELLOW}Step 2: Installing development tools...${NC}"
 
-if ! command -v flatpak >/dev/null 2>&1; then
-    echo -e "${CYAN}Installing Flatpak...${NC}"
-    case $PM in
-        apt) sudo apt install -y flatpak ;;
-        dnf) sudo dnf install -y flatpak ;;
-        yum) sudo yum install -y flatpak ;;
-        pacman) sudo pacman -Sy --noconfirm flatpak ;;
-        zypper) sudo zypper install -y flatpak ;;
-    esac
-else
-    echo -e "${GREEN}Flatpak already installed.${NC}"
-fi
+install_native codium codium
+install_native git git
+install_native gh gh
+install_native python3 python3
+install_native pip pip
+install_native node node
+install_native npm npm
+install_native javac javac
+install_native gcc gcc
+install_native g++ g++
+install_native make make
+install_native cmake cmake
+install_native sqlite3 sqlite3
 
-if ! flatpak remote-list | grep -q flathub; then
-    echo -e "${CYAN}Adding Flathub...${NC}"
-    sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-else
-    echo -e "${GREEN}Flathub already configured.${NC}"
-fi
-
+echo ""
+echo -e "${GREEN}Development tools installed.${NC}"
 echo ""
 
 # ============================
-#   3. INSTALL FLATPAK APPS
+#   3. INSTALL VIRTUALIZATION
 # ============================
-echo -e "${YELLOW}Step 3: Installing Flatpak apps...${NC}"
+echo -e "${YELLOW}Step 3: Installing VirtualBox...${NC}"
+install_native virtualbox virtualbox
 
-if ! flatpak list | grep -qi com.discordapp.Discord; then
-    flatpak install -y flathub com.discordapp.Discord
-else
-    echo -e "${GREEN}Discord already installed.${NC}"
-fi
-
-if ! flatpak list | grep -qi com.heroicgameslauncher.hgl; then
-    flatpak install -y flathub com.heroicgameslauncher.hgl
-else
-    echo -e "${GREEN}Heroic already installed.${NC}"
-fi
-
+echo ""
+echo -e "${GREEN}Virtualization tools installed.${NC}"
 echo ""
 
 # ============================
-#   4. INSTALL NATIVE GAMING APPS
+#   4. INSTALL PROFESSIONAL APPS
 # ============================
-echo -e "${YELLOW}Step 4: Installing native gaming applications...${NC}"
+echo -e "${YELLOW}Step 4: Installing professional applications...${NC}"
 
-install_native steam steam
-install_native lutris lutris
 install_native obs-studio obs
+install_native blender blender
+install_native gimp gimp
+install_native libreoffice libreoffice
+install_native gparted gparted
+install_native neofetch neofetch
+install_native qbittorrent qbittorrent
 
 echo ""
-echo -e "${GREEN}All gaming tools installed!${NC}"
+echo -e "${GREEN}Professional applications installed.${NC}"
+echo ""
 
 # ============================
 #   MODULE FOOTER
 # ============================
 echo ""
-echo -e "${GREEN}Gaming module complete!${NC}"
+echo -e "${GREEN}Professional workstation setup complete!${NC}"
 echo -e "${YELLOW}Press B to return to Artemis Setup, or ESC to quit.${NC}"
 
 while true; do
